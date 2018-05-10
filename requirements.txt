@@ -1,0 +1,7 @@
+appdirs==1.4.3
+Django==1.11
+djangorestframework
+django-jet==1.0.7
+psycopg2
+pillow
+django-filter
