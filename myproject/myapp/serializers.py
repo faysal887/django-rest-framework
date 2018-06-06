@@ -16,14 +16,34 @@ class UserSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = get_user_model()
-		fields = ('username', 'password')
-class TaskSerializers(serializers.ModelSerializer):
+		fields = ['username', 'password']
 
-	image = serializers.ImageField(max_length=None, use_url=True)
-	
+
+class TaskDetailSerializers(serializers.ModelSerializer):
+
+	# image = serializers.ImageField(max_length=None, use_url=True)
 	class Meta:
 		model=Task
-		fields = ('id', 'task_name', 'task_desc', 'completed', 'image')
+		fields = [
+				'id', 
+				'task_name', 
+				'task_desc', 
+				'completed'
+				] #, 'image')
+
+
+class TaskListSerializers(serializers.ModelSerializer):
+
+	# image = serializers.ImageField(max_length=None, use_url=True)
+	class Meta:
+		model=Task
+		fields = [
+				'id', 
+				'task_name', 
+				'task_desc', 
+				'completed'
+				] #, 'image')
+
 
 
 

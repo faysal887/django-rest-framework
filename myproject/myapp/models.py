@@ -7,5 +7,5 @@ class Task(models.Model):
 	task_desc    = models.CharField(max_length=200)
 	completed    = models.BooleanField(default=False)
 	date_created = models.DateTimeField(auto_now=True)
-	image 		 = models.ImageField(upload_to="Images/", default="Images/no_img.jpg")
+	# image 		 = models.ImageField(upload_to="Images/", default="Images/no_img.jpg", null=True, blank=True)
 

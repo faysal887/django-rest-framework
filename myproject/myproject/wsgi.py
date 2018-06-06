@@ -15,4 +15,5 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
 
 application = get_wsgi_application()
 
+
 # sys.path.append('/home/muhammadfaisal/Desktop/django-rest/myproject')

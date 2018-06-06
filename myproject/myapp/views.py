@@ -1,38 +1,60 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .serializers import TaskSerializers, UserSerializer
 from .models import Task
 from rest_framework.filters import OrderingFilter
-from django_filters.rest_framework import DjangoFilterBackend, FilterSet
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.contrib.auth import get_user_model
-from rest_framework.generics import CreateAPIView
+
+from .serializers import (
+	TaskDetailSerializers,	
+	TaskListSerializers, 
+	UserSerializer
+)
+
+from django_filters.rest_framework import (
+	DjangoFilterBackend, 
+	FilterSet
+)
+
+from rest_framework.decorators import (
+	api_view, 
+	authentication_classes,
+	permission_classes
+)
+
+from rest_framework.generics import (
+	CreateAPIView,
+	DestroyAPIView,
+	ListAPIView,
+	RetrieveAPIView,
+	UpdateAPIView,
+	CreateAPIView
+)
+
+class TaskCreateAPIView(CreateAPIView):
+	serializer_class = TaskDetailSerializers
+
+class TaskListAPIView(ListAPIView):
+	queryset = Task.objects.all()
+	serializer_class = TaskListSerializers
+
+class TaskDetailAPIView(RetrieveAPIView):
+	queryset = Task.objects.all()
+	serializer_class = TaskDetailSerializers
+
+class TaskUpdateAPIView(UpdateAPIView):
+	queryset = Task.objects.all()
+	serializer_class = TaskDetailSerializers
 
 
-@permission_classes((IsAuthenticated,))
-class TaskViewSet(viewsets.ModelViewSet):
-	# permission_classes = (IsAuthenticated,)
+class TaskDeleteAPIView(DestroyAPIView):
+	queryset = Task.objects.all()
+	serializer_class = TaskDetailSerializers
 
-	queryset = Task.objects.all().order_by('-date_created')
-	serializer_class = TaskSerializers
-
-	filter_backends = (DjangoFilterBackend, OrderingFilter)
-	filter_fields = ('completed',)
-	ordering = ('-date_created',)
-
-
+@permission_classes((AllowAny,))
 class CreateUserView(CreateAPIView):
 	model = get_user_model()
-	permission_classes = (AllowAny, )
 	serializer_class = UserSerializer
 
-# class DueTaskViewSet(viewsets.ModelViewSet):
-# 	queryset = Task.objects.filter(completed=False).order_by('-date_created')
-# 	serializer_class = TaskSerializers
 
-
-# class CompletedTaskViewSet(viewsets.ModelViewSet):
-# 	queryset = Task.objects.filter(completed=True).order_by('-date_created')
-# 	serializer_class = TaskSerializers
 
