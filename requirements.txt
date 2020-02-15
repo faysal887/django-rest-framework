@@ -1,5 +1,5 @@
 appdirs==1.4.3
-Django==1.11
+Django==1.11.28
 djangorestframework
 django-jet==1.0.7
 psycopg2
