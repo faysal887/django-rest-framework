@@ -1,4 +1,4 @@
-# Django Rest Framework Boilerplate
+## Django Rest Framework Boilerplate
 
 Easy to run dockerized solution for Django REST framework with built-in API authentication.
 
